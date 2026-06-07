@@ -25,7 +25,7 @@ return in markdown format.
 
 ## Expected findings
 
-| # | difficulty | Where | The bug / why it iss wrong | Correct version |
+| # | difficulty | Where | The bug / why it is wrong | Correct version |
 |---|------------|-------|--------------------------|-----------------|
 | 1 | Important |  `ProductController.UpdateProductPrice` | No input validation,  negative `Price`, or `DiscountPercentage` <0 / >100, all accepted; | Validate inputs;  |
 | 2 | Important |  `ProductController.UpdateProductPrice` | The endpoint always returns 200 OK regardless of outcome or whether the product exists. | return 400/404 as appropriate |
@@ -37,7 +37,7 @@ return in markdown format.
 | 8 | Blocking | `UpdateProductPrice` (static `LastPublishedPrice` field) | A `static Dictionary<int, decimal>` shared across all concurrent requests/threads. `Dictionary<,>` is not thread-safe; and can cause memory issues | thread safe mechanisim |
 | 9 | Important | `UpdateProductPrice.Execute` | compares and stores `request.Price` but the value actually published and written downstream is `finalPrice`. | Key the guard on the effective `finalPrice`, not `request.Price` |
 | 10 | Testing Gap |  `UpdateProductPriceTests.Execute_AppliesPromotionalDiscount_AndUpdatesSalesPrice` |  validates nothing really | suggest correct tests |
-
+| 11 | Important | ProductPriceChangedHandler.cs updates without verifiying the ID exist. | returns an exemption | raises the concern  |
 
 ## Trap / expected non-finding
 
@@ -57,7 +57,7 @@ Findings 5 and 6 may be solved in more than one valid way:
 
 ## Scoring
 
-Maximum score: 100.
+Maximum score: 108.
 
 ### Positive scoring
 
@@ -129,8 +129,9 @@ PASTE THE OUTPUT OF THE MODEL HERE
 | 8 | 14 |  |  |
 | 9 | 8 |  |  |
 | 10 | 8 |  |  |
+| 11 | 8 |  |  |
 
-Subtotal: **/100**
+Subtotal: **/108**
 
 ### Penalties
 

@@ -152,7 +152,7 @@ return in markdown format.
 | 9 | 8 | 8 |  |
 | 10 | 8 | 8 |  |
 
-Subtotal: **74/100**
+Subtotal: **74/108**
 
 ### Penalties
 
@@ -167,4 +167,4 @@ Penalty subtotal: **35**
 
 
 
-Final score: **39/100**
+Final score: **39/108**

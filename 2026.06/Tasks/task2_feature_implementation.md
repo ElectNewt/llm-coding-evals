@@ -6,7 +6,7 @@ Add a feature in the Distribt project
 ## Prompt
 
 ```
-Add the ability to cancel an Order.
+Add the ability to cancel an Order end to end.
 - An order that has already been dispatched/delivered cannot be cancelled, return a sensible error.
 
 ```
