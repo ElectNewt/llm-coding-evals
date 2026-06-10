@@ -28,7 +28,7 @@ Add the ability to cancel an Order end to end.
 - [] Result pattern - no exceptions are thrown.
 - [] A cancelled order cannot be cancelled again
 - [] Follows DDD principles
-- [] Idempotency - it should not trigger another event.
+- [] Idempotency - it should not trigger another event. - It needs to generate the domain event
 - [] cancellation tokens everywhere
 - [] can't cancel after dispatch. this should return some controlled error
 - [] Domain handler for the domain event that publishes the integration event (it can be with a TODO)

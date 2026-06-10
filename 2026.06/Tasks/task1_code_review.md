@@ -4,7 +4,7 @@
 
 In the Distribt project there is a [PR](pending link) to be evaluated by the LLM
 - [Pull request to evaluate](https://github.com/ElectNewt/Distribt/pull/55)
-- Commit SHA: [a05ee780026305b6a8fc758a5c8dff39dcf162df](https://github.com/ElectNewt/Distribt/pull/54/changes/a05ee780026305b6a8fc758a5c8dff39dcf162df)
+- Commit SHA: [3bc52275b8bc780ec6582b2c899be687666db7f8](https://github.com/ElectNewt/Distribt/pull/54/changes/3bc52275b8bc780ec6582b2c899be687666db7f8)
 
 
 ## Prompt
@@ -110,7 +110,20 @@ A missing test that is important because the PR introduced new behavior or fixed
 
 ## LLM Interaction
 ### Prompt
-
+```
+You are reviewing this code change (last commit) before it merges. Identify every finding you would report on.
+For each finding do a report like the following: 
+--
+    - Severity (Blocking, important, minor)
+    - category
+    - filename and extension
+    - location
+    - one line root cause
+    - impact
+--
+Do not fix anything, this is a review.
+return in markdown format.
+```
 
 ### copy&paste LLM output:
 ```
