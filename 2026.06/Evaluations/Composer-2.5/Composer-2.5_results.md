@@ -1,6 +1,6 @@
-# GPT-5 mini Results
+# Composer 2.5 Results
 
-- Code review - **56/108**
+- Code review - **50/100**
 - Feature implementation - **50/140**
 
-Total: **106/248**
+Total: **100/240**

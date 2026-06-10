@@ -1,8 +1,8 @@
 # GPT-5 mini Results
 
-using gpt-5 was just to have a basic baseline.
+using gpt-5 mini was just to have a basic baseline.
 
-- Code review - **39/108**
+- Code review - **33/100**
 - Feature implementation - **30/140**
 
-Total: **69/248**
+Total: **63/240**

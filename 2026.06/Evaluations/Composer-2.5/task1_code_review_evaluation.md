@@ -1,11 +1,11 @@
-# Code review for GPT-5 mini through Copilot
+# Code review for Composer 2.5 through Cursor
 
-- Repository:
-- PR link:
+
+- PR link: https://github.com/ElectNewt/Distribt/pull/55
 - Date evaluated: 07 - june - 2026
 - Version evaluated: [2026.06](./../../Tasks/task1_code_review.md)
 
-## LLM Interactrion
+## LLM Interaction
 ### Prompt
 ````
 You are reviewing this code change (last commit) before it merges. Identify every finding you would report on.
@@ -184,18 +184,18 @@ Impact: Harder to trace history, review blame, and understand release notes.
 | Expected finding # | Max points | Awarded points | Notes |
 |--------------------|-----------:|---------------:|-------|
 | 1 | 8 | 8 |  |
-| 2 | 8 |  |  |
+| 2 | 8 | 0 | not found |
 | 3 | 4 | 4 |  |
-| 4 | 14 | 14 |  |
-| 5 | 14 | 14 |  |
-| 6 | 14 |  |  |
+| 4 | 12 | 12 |  |
+| 5 | 12 | 12 |  |
+| 6 | 12 | 0 | not found |
 | 7 | 8 | 8 |  |
-| 8 | 14 | 14 |  |
+| 8 | 12 | 12 |  |
 | 9 | 8 | 8 |  |
 | 10 | 8 | 8 |  |
-| 10 | 8 | 8 |  |
+| 11 | 8 | 8 |  |
 
-Subtotal: **86/108**
+Subtotal: **80/100**
 
 ### Penalties
 
@@ -209,4 +209,4 @@ Penalty subtotal: **30**
 
 
 
-Final score: **56/100**
+Final score: **50/100**

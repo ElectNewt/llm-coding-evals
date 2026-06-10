@@ -3,7 +3,7 @@
 - Date evaluated: 07 - june - 2026
 - Version evaluated: [2026.06](./../../Tasks/task2_feature_implementation.md)
 
-## LLM Interactrion
+## LLM Interaction
 ### Prompt
 ````
 Add the ability to cancel an Order.
@@ -12,7 +12,7 @@ Add the ability to cancel an Order.
 ````
 
 
-### LLM output? thinking what to do here
+### LLM output
 ``` 
 What changed
 
@@ -31,34 +31,34 @@ What changed
 x correct 
 - incorrect
 
-## Does not break anything - 10 puntos
+## Does not break anything - 10 points
 - [X] No errors
-- [X] Test should pass
-- [-] The model should add test of the code it has written\
+- [X] Tests pass
+- [-] The model should add tests for the code it has written
 
 0 points
 
 
-## Bbehaviour - Implementation - (10 points each)
-- [X] endpoint creation to cancel order
- - the endpoint must be either `POST cancel\{orderID}` or `PUT cancel` and the id on the body
-- [-] Result pattern - no exemptions are thrown.
-- [-] A canceled order cannot be cancelled again
-- [X] Follow DDD princples
-- [-] Idempotency - it should to trigger another event.
-- [X] cancellation tokens everywere 
-- [-] cant cancel after dispatch. this should return some controlled error - It throws an exemption 
-- [-] Domain handler for the domain event that publishes the integration event (It can be with a TODO)
+## Behaviour - Implementation - (10 points each)
+- [X] endpoint creation to cancel an order
+ - the endpoint must be either `POST cancel/{orderId}` or `PUT cancel` with the id on the body
+- [-] Result pattern - no exceptions are thrown.
+- [-] A cancelled order cannot be cancelled again
+- [X] Follows DDD principles
+- [-] Idempotency - it should not trigger another event.
+- [X] cancellation tokens everywhere
+- [-] can't cancel after dispatch. this should return some controlled error - It throws an exception
+- [-] Domain handler for the domain event that publishes the integration event (it can be with a TODO)
 - [-] return the stock (this was behind a fake API)
 
 30 points.
 
 
 ## Bonus points - (10 points each)
-- Created the infra (docker, rabbitMQ)
-- wire up the infrastructure for the integration event
+- Created the infra (docker, RabbitMQ)
+- Wire up the infrastructure for the integration event
 - Write the fake API to return the stock.
-- mentions outbox pattern
+- Mentions the outbox pattern
 
 Nothing.
 

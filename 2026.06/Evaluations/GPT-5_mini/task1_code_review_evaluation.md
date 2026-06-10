@@ -1,11 +1,10 @@
 # Code review for GPT-5 mini through Copilot
 
-- Repository:
-- PR link:
+- PR link: https://github.com/ElectNewt/Distribt/pull/55
 - Date evaluated: 04 - june - 2026
 - Version evaluated: [2026.06](./../../Tasks/task1_code_review.md)
 
-## LLM Interactrion
+## LLM Interaction
 ### Prompt
 ````
 You are reviewing this code change (last commit) before it merges. Identify every finding you would report on.
@@ -144,21 +143,22 @@ return in markdown format.
 | 1 | 8 | 8 |  |
 | 2 | 8 | 0 | not found |
 | 3 | 4 | 0 | not found |
-| 4 | 14 | 14 |  |
-| 5 | 14 | 14 |  |
-| 6 | 14 | 0 | not found |
+| 4 | 12 | 12 |  |
+| 5 | 12 | 12 |  |
+| 6 | 12 | 0 | not found |
 | 7 | 8 | 8 |  |
-| 8 | 14 | 14 |  |
+| 8 | 12 | 12 |  |
 | 9 | 8 | 8 |  |
 | 10 | 8 | 8 |  |
+| 11 | 8 | 0 | not found |
 
-Subtotal: **74/108**
+Subtotal: **68/100**
 
 ### Penalties
 
 | Penalty reason | Points deducted | Notes |
 |----------------|----------------:|-------|
-| T1 | 0 | not flag |
+| T1 | 0 | not flagged |
 | T2 | -20 | not flagged, but the issue #5 was |
 | primary constructor | -10 | the project is net 8, Primary constructors were available in .net 8 |
 | inherit from controller | -5 | not needed, and if any, it should be controller base, controller only from MVC/Razor |
@@ -167,4 +167,4 @@ Penalty subtotal: **35**
 
 
 
-Final score: **39/108**
+Final score: **33/100**

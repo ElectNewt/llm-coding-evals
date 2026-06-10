@@ -3,11 +3,11 @@
 > **HIDDEN. It is key that we do not show this to the LLM.** 
 
 In the Distribt project there is a [PR](pending link) to be evaluated by the LLM
-- PR #TODO
-- Commit SHA TODO
+- [Pull request to evaluate](https://github.com/ElectNewt/Distribt/pull/55)
+- Commit SHA: [a05ee780026305b6a8fc758a5c8dff39dcf162df](https://github.com/ElectNewt/Distribt/pull/54/changes/a05ee780026305b6a8fc758a5c8dff39dcf162df)
 
 
-## prompt
+## Prompt
 ```
 You are reviewing this code change (last commit) before it merges. Identify every finding you would report on.
 For each finding do a report like the following: 
@@ -30,21 +30,21 @@ return in markdown format.
 | 1 | Important |  `ProductController.UpdateProductPrice` | No input validation,  negative `Price`, or `DiscountPercentage` <0 / >100, all accepted; | Validate inputs;  |
 | 2 | Important |  `ProductController.UpdateProductPrice` | The endpoint always returns 200 OK regardless of outcome or whether the product exists. | return 400/404 as appropriate |
 | 3 | Minor | `ProductPriceChangedHandler.Handle` | `cancellationToken` is accepted but not passed to `readStore.UpdateProductPrice(...)`.  | `UpdateProductPrice(id, price, cancellationToken)` |
-| 4 | Blocking | `UpdateProductPrice.Execute` | `(100 - request.DiscountPercentage) / 100` it uses ints for the division, which returns 0 | it should use deicmal |
+| 4 | Blocking | `UpdateProductPrice.Execute` | `(100 - request.DiscountPercentage) / 100` it uses ints for the division, which returns 0 | it should use decimal |
 | 5 | Blocking | `UpdateProductPrice.Execute` | `try { ModifySalesPrice } catch { }` swallows the failure and returns true but the price never changed. | Don't swallow; (or see note-1) |
 | 6 | Blocking | `UpdateProductPrice.Execute` | Publishes `ProductPriceChanged` before applying the price via `ModifySalesPrice`. If the price write fails, the event is already out | Persist first, publish after (or see note-1)|
 | 7 | Important | `UpdateProductPrice.Execute` | Rounds money through `double`: `(decimal)Math.Round((double)finalPrice, 2)`. | `Math.Round(finalPrice, 2)` on the `decimal` directly |
-| 8 | Blocking | `UpdateProductPrice` (static `LastPublishedPrice` field) | A `static Dictionary<int, decimal>` shared across all concurrent requests/threads. `Dictionary<,>` is not thread-safe; and can cause memory issues | thread safe mechanisim |
+| 8 | Blocking | `UpdateProductPrice` (static `LastPublishedPrice` field) | A `static Dictionary<int, decimal>` shared across all concurrent requests/threads. `Dictionary<,>` is not thread-safe; and can cause memory issues | thread-safe mechanism |
 | 9 | Important | `UpdateProductPrice.Execute` | compares and stores `request.Price` but the value actually published and written downstream is `finalPrice`. | Key the guard on the effective `finalPrice`, not `request.Price` |
 | 10 | Testing Gap |  `UpdateProductPriceTests.Execute_AppliesPromotionalDiscount_AndUpdatesSalesPrice` |  validates nothing really | suggest correct tests |
-| 11 | Important | ProductPriceChangedHandler.cs updates without verifiying the ID exist. | returns an exemption | raises the concern  |
+| 11 | Important | `ProductPriceChangedHandler.cs` | updates without verifying the ID exists, so it throws an exception | raise the concern |
 
 ## Trap / expected non-finding
 
 | # | Penalty | Where | Non-bug | Correct reviewer behavior |
 |---|--------:|-------|---------|---------------------------|
 | T1 | -20 | `ProductPriceChangedHandler.Handle` | Publishing `ProductPriceChanged` to `"external"` may look duplicated, but domain events and integration events are different concerns. | Do not flag this |
-| T2 | -20 | `UpdateProductPriceTests.Execute_WhenWarehouseUpdateFails_StillReportsSuccess` | if #5 is reported this should be flag as it is validating the bug  | flag to do it properly |
+| T2 | -20 | `UpdateProductPriceTests.Execute_WhenWarehouseUpdateFails_StillReportsSuccess` | if #5 is reported this test should be flagged too, as it is validating the bug | flag it and suggest doing it properly |
 
 ## Alternative acceptable solutions
 
@@ -57,11 +57,11 @@ Findings 5 and 6 may be solved in more than one valid way:
 
 ## Scoring
 
-Maximum score: 108.
+Maximum score: 100.
 
 ### Positive scoring
 
-- Blocking finding correctly identified: `+14`
+- Blocking finding correctly identified: `+12`
 - Important finding correctly identified: `+8`
 - Minor finding correctly identified: `+4`
 - Testing gap correctly identified: `+8`
@@ -75,10 +75,12 @@ Maximum score: 108.
 - Incorrect important finding: `-5`
 - Incorrect minor/nit finding: `-2`
 - Incorrect explanation for an otherwise valid issue: up to `-50%`
-- Any other Random AI stuff `-5` or `-10` depnding on how bad the suggestion is.
+- Any other random AI stuff: `-5` or `-10` depending on how bad the suggestion is.
 
 
 ## Severity definitions
+
+Severities are not ranked by how hard the issues are to find, but by how much they matter at the business layer.
 
 ### Blocking
 
@@ -99,14 +101,14 @@ A missing test that is important because the PR introduced new behavior or fixed
 
 
 ## Grading worksheet (Template)
-#Code review for [model] 
+#Code review for [model]
 
-- Repository:
-- PR link:
+
+- PR link: https://github.com/ElectNewt/Distribt/pull/55
 - Date evaluated:
 - Version evaluated:
 
-## LLM Interactrion
+## LLM Interaction
 ### Prompt
 
 
@@ -117,29 +119,29 @@ PASTE THE OUTPUT OF THE MODEL HERE
 
 ## Result
 
-| Expected finding # | Max points | Awarded points | Notes |
-|--------------------|-----------:|---------------:|-------|
-| 1 | 8 |  |  |
-| 2 | 8 |  |  |
-| 3 | 4 |  |  |
-| 4 | 14 |  |  |
-| 5 | 14 |  |  |
-| 6 | 14 |  |  |
-| 7 | 8 |  |  |
-| 8 | 14 |  |  |
-| 9 | 8 |  |  |
-| 10 | 8 |  |  |
-| 11 | 8 |  |  |
+| Expected finding # | Description | Max points | Awarded points | Notes |
+|--------------------|-------------|-----------:|---------------:|-------|
+| 1 | Input validation | 8 |  |  |
+| 2 | Return status code | 8 |  |  |
+| 3 | CancellationToken | 4 |  |  |
+| 4 | Int for division | 12 |  |  |
+| 5 | Try catch swallows | 12 |  |  |
+| 6 | Publishes event first | 12 |  |  |
+| 7 | Money rounding | 8 |  |  |
+| 8 | Static dictionary | 12 |  |  |
+| 9 | Cache Key| 8 |  |  |
+| 10 | Test validates nothing | 8 |  |  |
+| 11 | Handler needs to validate the ID | 8 |  |  |
 
-Subtotal: **/108**
+Subtotal: **/100**
 
 ### Penalties
 
-| Penalty reason | Points deducted | Notes |
-|----------------|----------------:|-------|
-| T1 | (up to -20) |  |
-| T2 | (up to -20) |  |
-| Other |  |  |
+| Penalty reason | Description | Points deducted | Notes |
+|----------------|-------------|----------------:|-------|
+| T1 | flags the event as duplicated | (up to -20) |  |
+| T2 | if #5 is flagged, this should be flagged too | (up to -20) |  |
+| Other | any random AI thing | (up to -10) |  |
 
 Penalty subtotal: **0**
 
@@ -148,7 +150,7 @@ Penalty subtotal: **0**
 Final score: **/100**
 
 
-## Cost
+## Cost (optional)
 - time
 - Tokens
  - Input
