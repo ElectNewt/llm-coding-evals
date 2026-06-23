@@ -27,10 +27,10 @@ Full results and a summary of both tests live in [2026.06.md](./2026.06/2026.06.
 
 | Model | Score | Details |
 |---------|---------|---------|
-| GPT-5.5 | **106/240** | [Results](./Evaluations/gpt-5.5/gpt-5.5_results.md) |
-| Composer-2.5 | **100/240** | [Results](./Evaluations/Composer-2.5/Composer-2.5_results.md) |
-| MAI-Code-1-Flash | **78/240** | [results](./Evaluations/MAI-Code-1-Flash/MAI-Code-1-Flash-results.md) |
-| GPT-5_mini | **63/240** | [Results](./Evaluations/GPT-5_mini/GPT-5mini_results.md) |
+| GPT-5.5 | **106/240** | [Results](./2026.06/Evaluations/gpt-5.5/gpt-5.5_results.md) |
+| Composer-2.5 | **100/240** | [Results](./2026.06//Evaluations/Composer-2.5/Composer-2.5_results.md) |
+| MAI-Code-1-Flash | **78/240** | [results](./2026.06//Evaluations/MAI-Code-1-Flash/MAI-Code-1-Flash-results.md) |
+| GPT-5_mini | **63/240** | [Results](./2026.06//Evaluations/GPT-5_mini/GPT-5mini_results.md) |
 
 
 ## Methodology
