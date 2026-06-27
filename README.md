@@ -27,6 +27,7 @@ Full results and a summary of both tests live in [2026.06.md](./2026.06/2026.06.
 
 | Model | Score | Details |
 |---------|---------|---------|
+| GLM-5.2 | **150/240** | [Results](./2026.06/Evaluations/GLM-5.2/GLM-5.2-results.md) |
 | GPT-5.5 | **106/240** | [Results](./2026.06/Evaluations/gpt-5.5/gpt-5.5_results.md) |
 | Composer-2.5 | **100/240** | [Results](./2026.06//Evaluations/Composer-2.5/Composer-2.5_results.md) |
 | MAI-Code-1-Flash | **78/240** | [results](./2026.06//Evaluations/MAI-Code-1-Flash/MAI-Code-1-Flash-results.md) |
