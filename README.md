@@ -16,6 +16,8 @@ As of June 2026, the following evaluations are included:
 
 Additional tests may be added over time. Historical results remain available for comparison.
 
+Evaluations are graded live with the [grading tool](./tools/grader/README.md) in `tools/grader` (open `index.html` in a browser).
+
 ## Scoring
 
 Each evaluation is scored using predefined criteria. The maximum possible score for the current test suite is **240 points** (100 for the code review and 140 for the feature implementation, bonus points included).

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LLM Eval Grader</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header id="topbar">
+    <div class="brand">LLM&nbsp;EVAL&nbsp;GRADER <span class="version" id="rubric-version"></span></div>
+    <input id="model-name" type="text" placeholder="Model name (e.g. GLM-5.2)" spellcheck="false">
+    <nav class="tabs">
+      <button class="tab active" data-tab="task1">Task 1 · Code Review</button>
+      <button class="tab" data-tab="task2">Task 2 · Feature</button>
+    </nav>
+    <div class="spacer"></div>
+    <div class="score-badge" id="score-badge">0 / 100</div>
+    <button id="btn-export" class="primary">Export .md</button>
+    <button id="btn-copy">Copy .md</button>
+    <button id="btn-reset" class="danger" title="Clear grading for this model">Reset</button>
+  </header>
+
+  <!-- ======================= TASK 1 ======================= -->
+  <main id="task1" class="task active">
+    <section class="pane" id="pane-findings">
+      <div class="pane-header">
+        <h2>LLM findings <span class="count" id="finding-count"></span></h2>
+        <button id="btn-view-diff" class="small">View PR diff</button>
+        <button id="btn-paste" class="small">Paste output…</button>
+      </div>
+      <div class="pane-body" id="findings-list">
+        <div class="empty-hint">
+          <p>Paste the model's review output to begin.</p>
+          <button id="btn-paste-2" class="primary">Paste output…</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pane" id="pane-score">
+      <div class="pane-header"><h2>Scoreboard</h2></div>
+      <div class="pane-body" id="scoreboard"></div>
+    </section>
+  </main>
+
+  <!-- ======================= TASK 2 ======================= -->
+  <main id="task2" class="task">
+    <section class="pane" id="pane-checklist">
+      <div class="pane-header"><h2>Feature implementation checklist</h2></div>
+      <div class="pane-body" id="checklist"></div>
+    </section>
+    <section class="pane" id="pane-changes">
+      <div class="pane-header">
+        <h2>Changed files <span class="count" id="t2-file-count"></span></h2>
+        <button id="btn-paste-diff" class="small">Paste diff…</button>
+      </div>
+      <div class="pane-body" id="changes-tree">
+        <div class="empty-hint">
+          <p>Paste the model's diff to see the change tree.<br><span class="muted">git diff in C:\repos\Distribt (e.g. <code>git diff HEAD</code> or <code>git diff main...</code>)</span></p>
+          <button id="btn-paste-diff-2" class="primary">Paste diff…</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Paste modal -->
+  <div id="paste-modal" class="modal hidden">
+    <div class="modal-box">
+      <h2 id="paste-title">Paste LLM output</h2>
+      <p class="muted" id="paste-desc">The raw markdown the model returned. It will be split into finding cards.</p>
+      <textarea id="paste-area" spellcheck="false" placeholder="Paste here…"></textarea>
+      <div class="modal-actions">
+        <button id="btn-parse" class="primary">Parse</button>
+        <button id="btn-cancel-paste">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diff modal -->
+  <div id="diff-modal" class="modal hidden">
+    <div class="modal-box diff-box">
+      <div class="modal-head">
+        <h2>PR diff <span class="muted" id="diff-pr-label"></span></h2>
+        <select id="diff-file-select"></select>
+        <div class="spacer"></div>
+        <button id="btn-close-diff">Close ✕</button>
+      </div>
+      <div id="diff-view"></div>
+    </div>
+  </div>
+
+  <div id="toast" class="hidden"></div>
+
+  <script src="rubric.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
